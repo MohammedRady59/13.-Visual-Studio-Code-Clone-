@@ -1,18 +1,22 @@
 import "./App.css";
 import OpenTab from "./components/OpenTab";
+import PanelGr from "./components/Panel";
 import ReculiveComponent from "./components/ReculiveComponent";
 import { fileTree } from "./data/fileTree";
 
 function App() {
   return (
-    <>
-      <div className="flex  h-screen">
-        <div className="w-64  border-r border-white">
-          <ReculiveComponent fileTree={fileTree} />
-        </div>
-        <OpenTab />
-      </div>
-    </>
+    <div className="flex h-screen">
+      <PanelGr
+        leftPanel={
+          <div className="w-64 ">
+            <ReculiveComponent fileTree={fileTree} />
+          </div>
+        }
+        show={true}
+        rightPanel={<OpenTab />}
+      />
+    </div>
   );
 }
 

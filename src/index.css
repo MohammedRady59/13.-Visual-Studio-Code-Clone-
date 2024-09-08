@@ -5,3 +5,6 @@ body {
   background-color: black;
   color: white;
 }
+.icons {
+  @apply w-5 h-5;
+}

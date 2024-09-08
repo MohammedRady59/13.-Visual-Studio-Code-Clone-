@@ -1,17 +1,48 @@
+import { X } from "lucide-react";
 import { IFile } from "../Interface";
 import RenderIcon from "./RenderIcon";
+import { RootState, useAppDispatch } from "../redux/store";
+import {
+  activeTap,
+  closeTap,
+  setClickedFile,
+} from "../redux/feature/FileTreeSlice";
+import { useSelector } from "react-redux";
 
 interface IProps {
   file: IFile;
 }
-
 function Tap({ file }: IProps) {
-  return (
-    <div className="flex  items-center">
-      <RenderIcon name={file.name} />
+  const { active } = useSelector((state: RootState) => state.treeFile);
 
-      <span className="cursor-pointer hover:bg-[#64646473] duration-300 flex justify-center items-center w-fit mr-2 p-1 rounded-md">
+  const dispatch = useAppDispatch();
+
+  function handleClickFile() {
+    dispatch(
+      setClickedFile({ filename: file.name, filecontent: file.content })
+    );
+    dispatch(activeTap(file.id));
+  }
+  return (
+    <div
+      className={`flex items-center  ${
+        active === file.id
+          ? "border-t-2 border-[#cf6ccf]"
+          : "border-t-2 border-transparent"
+      }`}
+    >
+      <RenderIcon name={file.name} />
+      <span
+        className="cursor-pointer duration-300 flex justify-center items-center w-fit mx-2 p-1 rounded-md"
+        onClick={handleClickFile}
+      >
         {file.name}
+      </span>
+      <span
+        onClick={() => dispatch(closeTap(file))}
+        className="cursor-pointer hover:bg-[#64646473] duration-300 flex justify-center items-center w-fit mr-2 p-1 rounded-md"
+      >
+        <X />
       </span>
     </div>
   );

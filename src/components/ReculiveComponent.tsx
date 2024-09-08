@@ -4,7 +4,11 @@ import RightArrowIcon from "./SVG/Right";
 import BottomArrowIcon from "./SVG/Bottom";
 import RenderIcon from "./RenderIcon";
 import { useAppDispatch } from "../redux/store";
-import { setOpenFiles } from "../redux/feature/FileTreeSlice";
+import {
+  activeTap,
+  setClickedFile,
+  setOpenFiles,
+} from "../redux/feature/FileTreeSlice";
 interface IProps {
   fileTree: IFile;
 }
@@ -14,8 +18,15 @@ function ReculiveComponent({ fileTree }: IProps) {
     setOpen((prev) => !prev);
   }
   const dispatch = useAppDispatch();
+  function handler(fileTree: IFile) {
+    dispatch(setOpenFiles(fileTree));
+    dispatch(
+      setClickedFile({ filename: fileTree.name, filecontent: fileTree.content })
+    );
+    dispatch(activeTap(fileTree.id));
+  }
   return (
-    <div className=" mb-2 ml-2 cursor-pointer">
+    <div className=" mb-2 ml-2 cursor-pointer mt-2">
       <div className="flex items-center mb-1  w-fit" onClick={() => toogle()}>
         {fileTree.isFolder ? (
           <div className="flex items-center">
@@ -30,10 +41,7 @@ function ReculiveComponent({ fileTree }: IProps) {
         ) : (
           <>
             <RenderIcon name={fileTree.name} />
-            <span
-              className="ml-2"
-              onClick={() => dispatch(setOpenFiles(fileTree))}
-            >
+            <span className="ml-2" onClick={() => handler(fileTree)}>
               {fileTree.name}
             </span>
           </>
