@@ -49,8 +49,16 @@ const FiletreeSlice = createSlice({
         };
       }
     },
+    closeAll: (state) => {
+      state.tapOpen = [];
+      state.active = null;
+      state.clicked = {
+        filename: "",
+        filecontent: "",
+      };
+    },
   },
 });
-export const { setOpenFiles, setClickedFile, activeTap, closeTap } =
+export const { setOpenFiles, setClickedFile, activeTap, closeTap, closeAll } =
   FiletreeSlice.actions;
 export default FiletreeSlice.reducer;

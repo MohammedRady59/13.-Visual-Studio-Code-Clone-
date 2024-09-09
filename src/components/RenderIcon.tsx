@@ -11,9 +11,11 @@ function RenderIcon({ name, isFolder, open }: IProps) {
 
   /* File */
   if (ext === "js") return <Iconfile src="/icons/javascript.svg" />;
+  if (ext === "ts") return <Iconfile src="/icons/typescript.svg" />;
   if (ext === "tsx") return <Iconfile src="/icons/react_ts.svg" />;
   if (ext === "jsx") return <Iconfile src="/icons/react.svg" />;
   if (ext === "html") return <Iconfile src="/icons/html.svg" />;
+  if (ext === "json") return <Iconfile src="/icons/jsconfig.svg" />;
   /* Folders */
   if (ext === "node_modules" && isFolder)
     return open ? (

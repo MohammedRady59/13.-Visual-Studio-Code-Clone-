@@ -8,11 +8,12 @@ import {
   setClickedFile,
 } from "../redux/feature/FileTreeSlice";
 import { useSelector } from "react-redux";
+import { HTMLAttributes } from "react";
 
-interface IProps {
+interface IProps extends HTMLAttributes<HTMLDivElement> {
   file: IFile;
 }
-function Tap({ file }: IProps) {
+function Tap({ file, ...rest }: IProps) {
   const { active } = useSelector((state: RootState) => state.treeFile);
 
   const dispatch = useAppDispatch();
@@ -30,6 +31,7 @@ function Tap({ file }: IProps) {
           ? "border-t-2 border-[#cf6ccf]"
           : "border-t-2 border-transparent"
       }`}
+      {...rest}
     >
       <RenderIcon name={file.name} />
       <span
