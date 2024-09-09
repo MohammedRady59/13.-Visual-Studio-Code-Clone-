@@ -25,15 +25,14 @@ function Menuapp({ dir, setMenu }: IProps) {
   return (
     <div ref={menuRef}>
       <ul
-        className={`bg-white text-black px-4 py-2 rounded-md `}
+        className={`bg-white text-black px-4 py-2 rounded-md cursor-pointer `}
         style={{
           position: "absolute",
           left: dir.x,
           top: dir.y,
         }}
       >
-        <li>close</li>
-        <li onClick={() => dispatch(closeAll())}>close All</li>
+        <li onClick={() => dispatch(closeAll())}>Close All</li>
       </ul>
     </div>
   );
